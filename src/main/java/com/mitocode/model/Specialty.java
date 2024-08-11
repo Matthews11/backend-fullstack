@@ -14,25 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@EqualsAndHashCode 
-public class Patient {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // comparacion de contenido de objeto
+public class Specialty {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	private Integer idPatient;
-	
-	@Column(nullable = false, length = 70)
-	private String fistName;
-	@Column(nullable = false, length = 70)
-	private String lastName;
-	@Column(nullable = false, length = 8)
-	private String dni;
-	@Column( length = 150)
-	private String address;
-	@Column(nullable = false, length = 9)
-	private String phone;
-	@Column(nullable = false, length = 55)
-	private String email;
-	
+	private Integer idSpeciality;
+	@Column(nullable = false, length = 50)
+	private String name;
+	@Column(nullable = false, length = 150)
+	private String description;
 }

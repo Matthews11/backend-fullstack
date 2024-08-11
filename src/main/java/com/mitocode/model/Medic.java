@@ -2,9 +2,12 @@ package com.mitocode.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,25 +17,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@EqualsAndHashCode 
-public class Patient {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // comparacion de contenido de objeto
+
+public class Medic {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	private Integer idPatient;
+	private Integer idMedic;
 	
+	@ManyToOne()//FK
+	@JoinColumn(name="id_specialty",nullable = false, foreignKey =@ForeignKey(name="FK_MEDIC_SPECIALTY"))
+	private Specialty specialty;
 	@Column(nullable = false, length = 70)
-	private String fistName;
+	private String firstName;
 	@Column(nullable = false, length = 70)
 	private String lastName;
-	@Column(nullable = false, length = 8)
-	private String dni;
-	@Column( length = 150)
-	private String address;
-	@Column(nullable = false, length = 9)
-	private String phone;
-	@Column(nullable = false, length = 55)
-	private String email;
-	
+	@Column(nullable = false, length = 12)
+	private String cmp;
+	@Column( length = 250)
+	private String photoUrl;
 }
