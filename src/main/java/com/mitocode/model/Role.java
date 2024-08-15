@@ -8,20 +8,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) // comparacion de contenido de objeto
-
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Role {
-	
-	@Id
-	@EqualsAndHashCode.Include
-	private Integer idRole;
-	@Column(nullable = false, length = 50)
-	private String name;
-	@Column(nullable = false, length = 150)
-	private String description;
 
+    @Id
+    @EqualsAndHashCode.Include
+    private Integer idRole;
+
+    @Column(nullable = false, length = 50)
+    private String name;
+
+    @Column(nullable = false, length = 150)
+    private String description;
 }

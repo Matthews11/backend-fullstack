@@ -1,24 +1,21 @@
 package com.mitocode.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @IdClass(ConsultExamPk.class)
 public class ConsultExam {
 
-	
-	@Id
-	private Consult consult;
-	@Id
-	private Exam exam; 
-	
-	 
+    @Id
+    private Consult consult;
+
+    @Id
+    private Exam exam;
+
 }

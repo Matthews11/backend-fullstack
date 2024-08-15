@@ -9,11 +9,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class ConsultExamPk {
 
-	@ManyToOne
-	@JoinColumn(name = "id_consult")
-	private Consult consult;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_exam")
-	private Exam exam; 
+    @ManyToOne
+    @JoinColumn(name = "id_consult")
+    private Consult consult;
+
+    @ManyToOne
+    @JoinColumn(name = "id_exam")
+    private Exam exam;
 }

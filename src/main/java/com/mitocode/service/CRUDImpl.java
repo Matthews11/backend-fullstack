@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.mitocode.exception.ModelNotFoundException;
 import com.mitocode.repo.IGenericRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -36,12 +37,13 @@ public abstract class CRUDImpl<T,ID> implements ICRUD<T, ID> {
 	@Override
 	public T findById(ID id) {
 		// TODO Auto-generated method stub
-		return getRepo().findById(id).orElse(null);
+		return getRepo().findById(id).orElseThrow(()-> new ModelNotFoundException("Id not found: "+id));
 	}
 
 	@Override
 	public void delete(ID id) {
 		// TODO Auto-generated method stub
+		 getRepo().findById(id).orElseThrow(()-> new ModelNotFoundException("Id not found: "+id));
 		 getRepo().deleteById(id);
 	}
 
