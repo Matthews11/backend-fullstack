@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@IdClass(ConsultExamPk.class)
+@IdClass(ConsultExamPK.class)
 public class ConsultExam {
 
     @Id
@@ -18,4 +18,7 @@ public class ConsultExam {
     @Id
     private Exam exam;
 
+    public ConsultExam(Exam exam) {
+        this.exam = exam;
+    }
 }

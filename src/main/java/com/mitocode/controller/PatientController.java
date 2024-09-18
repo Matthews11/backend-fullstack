@@ -1,6 +1,7 @@
 package com.mitocode.controller;
 
 import com.mitocode.dto.PatientDTO;
+import com.mitocode.model.Medic;
 import com.mitocode.model.Patient;
 import com.mitocode.service.IPatientService;
 import com.mitocode.service.impl.PatientServiceImpl;
@@ -9,22 +10,26 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.net.URI;
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
-@RequestMapping("/patients")
+@RequestMapping("/patients") //sustantivo plural
 //@AllArgsConstructor
 @RequiredArgsConstructor
+//@CrossOrigin(origins = "*")
 public class PatientController {
 
     private final IPatientService service;
@@ -73,8 +78,8 @@ public class PatientController {
         service.delete(id);
 
         return ResponseEntity.noContent().build();
-    } 
-    
+    }
+
     @GetMapping("/hateoas/{id}")
     public EntityModel<PatientDTO> findByIdHateoas(@PathVariable("id") Integer id) {
         EntityModel<PatientDTO> resource = EntityModel.of(mapperUtil.map(service.findById(id), PatientDTO.class));
@@ -87,6 +92,13 @@ public class PatientController {
         resource.add(link2.withRel("all-medic-info"));
 
         return resource;
+    }
+
+    @GetMapping("/pageable")
+    public ResponseEntity<Page<PatientDTO>> listPage(Pageable pageable){
+        Page<PatientDTO> page = service.listPage(pageable).map(e -> mapperUtil.map(e, PatientDTO.class));
+
+        return ResponseEntity.ok(page);
     }
 
     /*private PatientDTO convertToDto(Patient obj) {

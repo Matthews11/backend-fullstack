@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Embeddable
 @EqualsAndHashCode
-public class ConsultExamPk {
+public class ConsultExamPK {
 
     @ManyToOne
     @JoinColumn(name = "id_consult")
